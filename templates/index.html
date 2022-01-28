@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>OpenSO2</title>
+
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+
+  <div id="navigation"></div>
+
+  <header>
+    <h1>OpenSO2 - {{ station_name }}</h1>
+  </header>
+
+  <section>
+    <article>
+      Welcome to the landing page for {{ station_name }}. <br>
+
+      <div id='chart1' class='chart'”></div>
+      <div id='chart2' class='chart'”></div>
+
+      Here are is a map!
+
+      <div id="map" style="height: 500px;"></div>
+      <script type="text/javascript">
+        // The first parameter are the coordinates of the center of the map
+        // The second parameter is the zoom level
+        var map = L.map('map').setView([ {{ volcano_latitude }}, {{ volcano_longitude }}], 12);
+
+        // {s}, {z}, {x} and {y} are placeholders for map tiles
+        // {x} and {y} are the x/y of where you are on the map
+        // {z} is the zoom level
+        // {s} is the subdomain of cartodb
+          var layer = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+          attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+        });
+
+        // Now add the layer onto the map
+        map.addLayer(layer);
+
+        L.marker([{{ volcano_latitude }}, {{ volcano_longitude }}]).addTo(map)
+        .bindPopup("<strong>Cumbre Vieja</strong>").openPopup();
+
+        L.marker([{{ scanner_latitude }}, {{ scanner_longitude }}]).addTo(map)
+        .bindPopup("<strong>Scanner</strong>").openPopup();
+      </script>
+
+    </article>
+  </section>
+</body>
+
+
+
+<script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+<script type='text/javascript'>
+  var SO2graphs = {{SO2graphJSON | safe}};
+  Plotly.plot('chart1',SO2graphs,{});
+  var INTgraphs = {{INTgraphJSON | safe}};
+  Plotly.plot('chart2',INTgraphs,{});
+</script>
+
+</html>
