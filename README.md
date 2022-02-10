@@ -11,13 +11,14 @@ pip3 install virtualenv
 
 Clone the repository and enter:
 ```
-git clone https://https://github.com/benjaminesse/ScanPiServer.git
+git clone https://github.com/benjaminesse/ScanPiServer.git
 cd ScanPiServer
 ```
 
-Create the virtual environment:
+Create the virtual environment and activate:
 ```
 python3 -m venv venv
+. venv/bin/activate
 ```
 
 Install the dependencies:
