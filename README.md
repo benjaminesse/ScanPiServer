@@ -22,7 +22,7 @@ python3 -m venv venv
 
 Install the dependencies:
 ```
-pip3 install numpy pandas plotly Flask gunicorn
+pip3 install numpy pandas plotly Flask gunicorn PyYAML
 ```
 
 ## Testing
