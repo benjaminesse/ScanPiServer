@@ -49,7 +49,7 @@ def index():
                            INTgraphJSON=INTgraphJSON,
                            station_name=station_name,
                            log_text='',
-                           status_text=status)
+                           status=status)
 
 
 if __name__ == '__main__':
