@@ -31,7 +31,10 @@ def generate_map(fpath, date_to_plot, parameter, label, cmap='viridis',
     try:
         scan_fnames = os.listdir(f'{fpath}/{date_to_plot}/so2')
     except FileNotFoundError:
-        fig = px.scatter(x=[0, 1, 2, 3, 4], y=[0, 1, 4, 9, 16])
+        df = pd.DataFrame(index=np.arange(0),
+                          columns=['Scan Time [UTC]', 'Scan Angle', label])
+        fig = px.scatter(df, x='Scan Time [UTC]', y='Scan Angle', color=label,
+                         range_color=limits, color_continuous_scale=cmap)
         graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
         return graphJSON
 

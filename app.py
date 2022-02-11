@@ -48,7 +48,7 @@ def index():
                            SO2graphJSON=SO2graphJSON,
                            INTgraphJSON=INTgraphJSON,
                            station_name=station_name,
-                           log_text='',
+                           log_text='slkjdhsljhgf lk;jhgf l;ahgf;lkjhg kljhng lkrsj;gn krlf;dnhgf\nwsjhf;lkajwhdfe klsjahnf klsjenhklhkjuh\n;sdjkgvfkl;jhglkjauhglkasjdhglsajhgflisahgflisdhgfliksudgjhgdh\n',
                            status=status)
 
 
