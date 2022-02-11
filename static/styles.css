@@ -16,6 +16,6 @@ header {
 
 textarea {
   overflow-y: scroll;
-  height: 200px;
-  cols: 100 
+  height: 100px;
+  cols: 100
 }
