@@ -14,8 +14,8 @@ header {
   max_height: 100px;
 }
 
-textarea {
+/* textarea {
   overflow-y: scroll;
   height: 100px;
   cols: 100;
-}
+} */
