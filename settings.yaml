@@ -1,4 +1,4 @@
-StationName: ScanPi3
+StationName: ScanPi2
 DataPath: /home/pi/OpenSO2/Results
 VentLocation:
   - 28.614
