@@ -54,16 +54,19 @@ def generate_map(fpath, date_to_plot, parameter, label, cmap='viridis',
 
         # Pull the time and convert to a timestamp
         for j, t in enumerate(scan_df['Time']):
+            try:
+                H = int(t)
+                M = int((t - H)*60)
+                S = int((t-H-M/60))*3600
+                ts = pd.Timestamp(year=y, month=m, day=d, hour=H, minute=M,
+                                  second=S)
 
-            H = int(t)
-            M = int((t - H)*60)
-            S = int((t-H-M/60))*3600
-            ts = pd.Timestamp(year=y, month=m, day=d, hour=H, minute=M,
-                              second=S)
+                # Set the next row
+                df.iloc[n] = [ts, scan_df['Angle'].iloc[j],
+                              scan_df[parameter].iloc[j]]
 
-            # Set the next row
-            df.iloc[n] = [ts, scan_df['Angle'].iloc[j],
-                          scan_df[parameter].iloc[j]]
+            except ValueError:
+                pass
 
             # Iterate the counter
             n += 1
