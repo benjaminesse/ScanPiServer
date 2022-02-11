@@ -43,7 +43,8 @@ def index():
                            zoom=map_zoom,
                            SO2graphJSON=SO2graphJSON,
                            INTgraphJSON=INTgraphJSON,
-                           station_name=station_name)
+                           station_name=station_name,
+                           log_text='skljhgflksjhg;logrhj;lrhjg;ldsjhrgflkdrfjglkdjfhglkdfjugfdkjhgkdfjhglkdjhglkdrehglk\nauofhgalwisuhgflaifhgliauhfgiagfhiaeswugfhaieswuhfisahliuaggiu\naliushfliauhgflushgfluhgf')
 
 
 if __name__ == '__main__':
