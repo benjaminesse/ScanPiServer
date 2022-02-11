@@ -19,12 +19,16 @@ def index():
     with open('settings.yaml', 'r') as ymlfile:
         config = yaml.load(ymlfile, Loader=yaml.FullLoader)
 
+    # Get the station status
+    with open(f"{config['DataPath']}/Station/status.txt", 'r') as r:
+        status = r.readline()
+
     # Set date to today
     date_to_plot = str(datetime.now().date())
 
     # Pull config from file
     station_name = config['StationName']
-    fpath = config['DataPath']
+    fpath = f"{config['DataPath']}/Results"
     vlat, vlon = config['VentLocation']
     slat, slon = config['ScannerLocation']
     map_zoom = config['MapZoom']
@@ -44,7 +48,8 @@ def index():
                            SO2graphJSON=SO2graphJSON,
                            INTgraphJSON=INTgraphJSON,
                            station_name=station_name,
-                           log_text='skljhgflksjhg;logrhj;lrhjg;ldsjhrgflkdrfjglkdjfhglkdfjugfdkjhgkdfjhglkdjhglkdrehglk\nauofhgalwisuhgflaifhgliauhfgiagfhiaeswugfhaieswuhfisahliuaggiu\naliushfliauhgflushgfluhgf')
+                           log_text='',
+                           status_text=status)
 
 
 if __name__ == '__main__':
