@@ -9,8 +9,6 @@ from serverpi.plotting import generate_map
 
 app = Flask(__name__)
 
-fpath = '/home/pi/OpenSO2/Results'
-
 
 @app.route('/')
 def index():
@@ -20,8 +18,11 @@ def index():
         config = yaml.load(ymlfile, Loader=yaml.FullLoader)
 
     # Get the station status
-    with open(f"{config['DataPath']}/Station/status.txt", 'r') as r:
-        status = r.readline()
+    try:
+      with open(f"{config['DataPath']}/Station/status.txt", 'r') as r:
+          status = r.readline()
+    except FileNotFoundError:
+        status = 'Unknown'
 
     # Set date to today
     date_to_plot = str(datetime.now().date())
@@ -39,6 +40,18 @@ def index():
     INTgraphJSON = generate_map(fpath, date_to_plot, 'int_av', 'Intensity',
                                 'magma')
 
+    # Read in the log file if it exists
+    log_fname = f"{fpath}/{date_to_plot}/{date_to_plot}.log"
+    try:
+        with open(log_fname, 'r') as r:
+            lines = r.readlines()
+        log_text = ''
+        for line in lines:
+            log_text += line.strip() + '\n'
+    except FileNotFoundError:
+        log_text = 'Log file not found!'
+
+
     return render_template('index.html',
                            volcano_latitude=vlat,
                            volcano_longitude=vlon,
@@ -48,7 +61,7 @@ def index():
                            SO2graphJSON=SO2graphJSON,
                            INTgraphJSON=INTgraphJSON,
                            station_name=station_name,
-                           log_text='slkjdhsljhgf lk;jhgf l;ahgf;lkjhg kljhng lkrsj;gn krlf;dnhgf\nwsjhf;lkajwhdfe klsjahnf klsjenhklhkjuh\n;sdjkgvfkl;jhglkjauhglkasjdhglsajhgflisahgflisdhgfliksudgjhgdh\n',
+                           log_text=log_text,
                            status=status)
 
 
