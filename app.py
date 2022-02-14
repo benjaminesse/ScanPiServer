@@ -20,8 +20,8 @@ def index(datestr):
     try:
         with open(f"{config['DataPath']}/Station/status.txt", 'r') as r:
             status_time, status_text = r.readline().split(' - ')
-            status_time = datetime.strftime(status_time, "%Y-%m-%d %H:%M:%S.%f"
-                                            ).strptime("%Y-%m-%d %H:%M:%S")
+            status_time = datetime.strptime(status_time, "%Y-%m-%d %H:%M:%S.%f"
+                                            ).strftime("%Y-%m-%d %H:%M:%S")
     except FileNotFoundError:
         status_text, status_time = 'Unknown', '???'
 
