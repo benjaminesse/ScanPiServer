@@ -64,7 +64,7 @@ def index():
                            status_time=status_time)
 
 
-@app.route('/<datestr>/')
+@app.route("/<datestr>/")
 def index_date(datestr):
     """Make display page for a given date."""
     # Read in the overall config file
@@ -79,7 +79,10 @@ def index_date(datestr):
         status_text, status_time = 'Unknown', '???'
 
     # Set date to today
-    date_to_plot = datetime.strptime(datestr, '%Y-%m-%d')
+    try:
+        date_to_plot = str(datetime.strptime(datestr, '%Y-%m-%d').date())
+    except ValueError:
+        date_to_plot = str(datetime.now().date())
 
     # Pull config from file
     station_name = config['StationName']
