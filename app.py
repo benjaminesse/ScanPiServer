@@ -22,8 +22,8 @@ def index(datestr):
             status_time, status_text = r.readline().split(' - ')
             status_time = datetime.strptime(status_time, "%Y-%m-%d %H:%M:%S.%f"
                                             ).strftime("%Y-%m-%d %H:%M:%S")
-    except FileNotFoundError:
-        status_text, status_time = 'Unknown', '???'
+    except Exception as e:
+        status_text, status_time = f'Unknown ({e})', '???'
 
     # Get the date to plot
     if datestr == 'today':
@@ -33,9 +33,6 @@ def index(datestr):
             date_to_plot = str(datetime.strptime(datestr, '%Y-%m-%d').date())
         except ValueError:
             date_to_plot = str(datetime.now().date())
-
-    # Set date to today
-    date_to_plot = str(datetime.now().date())
 
     # Pull config from file
     station_name = config['StationName']
