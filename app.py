@@ -19,7 +19,7 @@ def index():
     # Get the station status
     try:
         with open(f"{config['DataPath']}/Station/status.txt", 'r') as r:
-            status_text, status_time = r.readline().split(' - ')
+            status_time, status_text = r.readline().split(' - ')
     except FileNotFoundError:
         status_text, status_time = 'Unknown', '???'
 
@@ -51,6 +51,7 @@ def index():
         log_text = 'Log file not found!'
 
     return render_template('index.html',
+                           date_to_plot=date_to_plot,
                            volcano_latitude=vlat,
                            volcano_longitude=vlon,
                            scanner_latitude=slat,
@@ -64,7 +65,7 @@ def index():
                            status_time=status_time)
 
 
-@app.route("/<datestr>/")
+@app.route("/<datestr>")
 def index_date(datestr):
     """Make display page for a given date."""
     # Read in the overall config file
@@ -74,7 +75,7 @@ def index_date(datestr):
     # Get the station status
     try:
         with open(f"{config['DataPath']}/Station/status.txt", 'r') as r:
-            status_text, status_time = r.readline().split(' - ')
+            status_time, status_text = r.readline().split(' - ')
     except FileNotFoundError:
         status_text, status_time = 'Unknown', '???'
 
@@ -109,6 +110,7 @@ def index_date(datestr):
         log_text = 'Log file not found!'
 
     return render_template('index.html',
+                           date_to_plot=date_to_plot,
                            volcano_latitude=vlat,
                            volcano_longitude=vlon,
                            scanner_latitude=slat,
