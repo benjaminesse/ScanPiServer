@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return redirect(url_for('/station', datestr='today'))
+    return redirect(url_for('station', datestr='today'))
 
 
 @app.route('/<datestr>')
