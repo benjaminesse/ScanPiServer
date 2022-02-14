@@ -19,8 +19,8 @@ def index():
 
     # Get the station status
     try:
-      with open(f"{config['DataPath']}/Station/status.txt", 'r') as r:
-          status = r.readline()
+        with open(f"{config['DataPath']}/Station/status.txt", 'r') as r:
+            status = r.readline()
     except FileNotFoundError:
         status = 'Unknown'
 
@@ -50,7 +50,6 @@ def index():
             log_text += line.strip() + '\n'
     except FileNotFoundError:
         log_text = 'Log file not found!'
-
 
     return render_template('index.html',
                            volcano_latitude=vlat,
