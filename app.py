@@ -10,12 +10,12 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def home():
-    return redirect(url_for('/today'))
+def index():
+    return redirect(url_for('/station', datestr='today'))
 
 
 @app.route('/<datestr>')
-def index(datestr):
+def station(datestr):
     """Make index page."""
     # Read in the overall config file
     with open('settings.yaml', 'r') as ymlfile:
@@ -63,7 +63,7 @@ def index(datestr):
     except FileNotFoundError:
         log_text = 'Log file not found!'
 
-    return render_template('index.html',
+    return render_template('station.html',
                            date_to_plot=date_to_plot,
                            volcano_latitude=vlat,
                            volcano_longitude=vlon,
