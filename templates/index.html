@@ -18,16 +18,17 @@
 
   <section>
     <article>
-      
-      <h2>Welcome to the landing page for {{ station_name }}. Current status: {{ status }} </h2> <br>
+
+      <h2>Welcome to the landing page for {{ station_name }}. </h2> <br>
+      <h3>Current status: {{ status_text }} (at {{ status_time }})</h3> <br>
 
       <div id='chart1' class='chart'”></div>
       <div id='chart2' class='chart'”></div>
 
       <div id="map" style="height: 500px;"></div> <br>
-      
+
       <h2>Station Logs:</h2> <br>
-      
+
       <textarea id="logs" name="logs" rows="8" cols="100">{{ log_text }}</textarea> <br>
 
       <script type="text/javascript">

@@ -19,9 +19,9 @@ def index():
     # Get the station status
     try:
         with open(f"{config['DataPath']}/Station/status.txt", 'r') as r:
-            status = r.readline()
+            status_text, status_time = r.readline().split(' - ')
     except FileNotFoundError:
-        status = 'Unknown'
+        status_text, status_time = 'Unknown', '???'
 
     # Set date to today
     date_to_plot = str(datetime.now().date())
@@ -60,7 +60,8 @@ def index():
                            INTgraphJSON=INTgraphJSON,
                            station_name=station_name,
                            log_text=log_text,
-                           status=status)
+                           status_text=status_text,
+                           status_time=status_time)
 
 
 @app.route('/<datestr>/')
@@ -73,9 +74,9 @@ def index_date(datestr):
     # Get the station status
     try:
         with open(f"{config['DataPath']}/Station/status.txt", 'r') as r:
-            status = r.readline()
+            status_text, status_time = r.readline().split(' - ')
     except FileNotFoundError:
-        status = 'Unknown'
+        status_text, status_time = 'Unknown', '???'
 
     # Set date to today
     date_to_plot = datetime.strptime(datestr, '%Y-%m-%d')
@@ -114,7 +115,8 @@ def index_date(datestr):
                            INTgraphJSON=INTgraphJSON,
                            station_name=station_name,
                            log_text=log_text,
-                           status=status)
+                           status_text=status_text,
+                           status_time=status_time)
 
 
 if __name__ == '__main__':
