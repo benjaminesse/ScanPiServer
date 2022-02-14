@@ -24,7 +24,7 @@ def index(datestr):
         status_text, status_time = 'Unknown', '???'
 
     # Get the date to plot
-    if datestr == '':
+    if datestr == 'today':
         date_to_plot = str(datetime.now().date())
     else:
         try:
